@@ -1,0 +1,3 @@
+[submodule "android_kernel_google_redbull"]
+	path = android_kernel_google_redbull
+	url = https://github.com/LineageOS/android_kernel_google_redbull

@@ -1,0 +1,43 @@
+diff --git i/arch/arm64/configs/redbull_defconfig w/arch/arm64/configs/redbull_defconfig
+index 336f6b04b771..d38ab4f40b27 100644
+--- i/arch/arm64/configs/redbull_defconfig
++++ w/arch/arm64/configs/redbull_defconfig
+@@ -716,3 +716,5 @@ CONFIG_ARM64_STRICT_BREAK_BEFORE_MAKE=y
+ CONFIG_KPROBES=y
+ CONFIG_HAVE_KPROBES=y
+ CONFIG_KPROBE_EVENTS=y
++#CONFIG_CMDLINE="slub_debug=FPZU"
++#CONFIG_CMDLINE_EXTEND=y
+diff --git i/drivers/usb/gadget/function/f_hid.c w/drivers/usb/gadget/function/f_hid.c
+index d61d0d2bb090..56a401fabebf 100644
+--- i/drivers/usb/gadget/function/f_hid.c
++++ w/drivers/usb/gadget/function/f_hid.c
+@@ -90,6 +90,7 @@ static void hidg_release(struct device *dev)
+ {
+ 	struct f_hidg *hidg = container_of(dev, struct f_hidg, dev);
+ 
++	kfree(hidg->report_desc);
+ 	kfree(hidg->set_report_buf);
+ 	kfree(hidg);
+ }
+@@ -1295,7 +1296,6 @@ static void hidg_free(struct usb_function *f)
+ 
+ 	hidg = func_to_hidg(f);
+ 	opts = container_of(f->fi, struct f_hid_opts, func_inst);
+-	kref_put(&hidg->kref, hidg_destroy);
+ 	put_device(&hidg->dev);
+ 	mutex_lock(&opts->lock);
+ 	--opts->refcnt;
+@@ -1347,9 +1347,9 @@ static struct usb_function *hidg_alloc(struct usb_function_instance *fi)
+ 	hidg->report_length = opts->report_length;
+ 	hidg->report_desc_length = opts->report_desc_length;
+ 	if (opts->report_desc) {
+-		hidg->report_desc = devm_kmemdup(&hidg->dev, opts->report_desc,
+-						 opts->report_desc_length,
+-						 GFP_KERNEL);
++		hidg->report_desc = kmemdup(opts->report_desc,
++					    opts->report_desc_length,
++					    GFP_KERNEL);
+ 		if (!hidg->report_desc) {
+ 			put_device(&hidg->dev);
+ 			--opts->refcnt;
