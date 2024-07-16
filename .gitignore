@@ -1,0 +1,4 @@
+# Ignore the full device tree that seems required just to build the kernel
+# I just symlink ./android_kernel_google_redbull into lineage/kernel/google/redbull
+# and `make bootimage` inside ./lineage
+/lineage
