@@ -1,0 +1,24 @@
+diff --git i/arch/arm64/boot/dts/google/dsi-panel-s6e3hc2-dvt-dsc-1080p-cmd.dtsi w/arch/arm64/boot/dts/google/dsi-panel-s6e3hc2-dvt-dsc-1080p-cmd.dtsi
+index 40bbfa9d83de..6ea81b13362f 100644
+--- i/arch/arm64/boot/dts/google/dsi-panel-s6e3hc2-dvt-dsc-1080p-cmd.dtsi
++++ w/arch/arm64/boot/dts/google/dsi-panel-s6e3hc2-dvt-dsc-1080p-cmd.dtsi
+@@ -66,6 +66,7 @@
+ 
+ 		qcom,mdss-dsi-t-clk-post = <0x15>;
+ 		qcom,mdss-dsi-t-clk-pre = <0x12>;
++		qcom,ulps-enabled;
+ 
+ 		qcom,mdss-dsi-bl-notifier-ranges = <115 140 167 1023>;
+ 
+diff --git i/arch/arm64/boot/dts/vendor/qcom/lito-sde.dtsi w/arch/arm64/boot/dts/vendor/qcom/lito-sde.dtsi
+index 7e761d30b9e6..0f7cca3a1f21 100644
+--- i/arch/arm64/boot/dts/vendor/qcom/lito-sde.dtsi
++++ w/arch/arm64/boot/dts/vendor/qcom/lito-sde.dtsi
+@@ -658,6 +658,7 @@
+ 						00 00 0a 0a
+ 						00 00 8a 8a];
+ 		qcom,platform-regulator-settings = [1d 1d 1d 1d 1d];
++		qcom,panel-allow-phy-poweroff;
+ 		qcom,phy-supply-entries {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;

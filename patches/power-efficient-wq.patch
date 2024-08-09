@@ -1,0 +1,12 @@
+diff --git i/arch/arm64/configs/redbull_defconfig w/arch/arm64/configs/redbull_defconfig
+index c77075b2ca56..918f4bb37dd3 100644
+--- i/arch/arm64/configs/redbull_defconfig
++++ w/arch/arm64/configs/redbull_defconfig
+@@ -73,6 +73,7 @@ CONFIG_PM_WAKELOCKS_LIMIT=0
+ # CONFIG_PM_WAKELOCKS_GC is not set
+ CONFIG_PM_DEBUG=y
+ CONFIG_PM_SLEEP_MONITOR=y
++CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
+ CONFIG_ENERGY_MODEL=y
+ CONFIG_CPU_IDLE=y
+ CONFIG_ARM_CPUIDLE=y
