@@ -45,10 +45,11 @@ patch() {
     # and don't append "-dirty" to the kernel name
     touch .scmversion
 
-    git clone $KERNELSU_GIT_URL $KERNELSU_GIT_DIR
+    git clone --filter=tree:0 $KERNELSU_GIT_URL $KERNELSU_GIT_DIR
+	git checkout v0.9.5
 
-    # Apply my patches
-    git apply "$SCRIPT_DIR/kernelsu-redbull.patch"
+    # Apply patches
+    git am "$INITIAL_WORKING_DIR/patches/"*.patch
 
     return 0
 }
@@ -57,7 +58,7 @@ sync_latest_files() {
     croot
 
     # Get latest files
-    repo sync
+    repo sync -j12 --force-sync
     breakfast ${DEVICE_CODENAME}
 
     # If `breakfast` fails, extract proprietary blobs
@@ -96,11 +97,6 @@ setup_env() {
 }
 
 preemptive_error_checking() {
-    # ensure `kernelsu-redbull.patch` exists
-
-    # exit early if we find some missing directories to avoid doing tons of work only to fail later
-    #
-
     # Ensure we're in a nix shell
     [[ "$IN_NIX_SHELL" == "pure" ]] || {
         error "Script must be run inside pure nix-shell"
@@ -115,7 +111,7 @@ main() {
     DEVICE_CODENAME=redfin
     DEVICE_VENDOR=google
     LINEAGE_CODE_DIR=./lineage
-    SCRIPT_DIR=$(readlink -f .)
+    INITIAL_WORKING_DIR=$(readlink -f .)
 
     debug "preemptive_error_checking"
     preemptive_error_checking || exit
@@ -123,8 +119,8 @@ main() {
     debug "setup_env"
     setup_env
 
-    debug "sync_latest_files"
-    sync_latest_files
+    #debug "sync_latest_files"
+    #sync_latest_files
 
     debug "patch"
     patch
