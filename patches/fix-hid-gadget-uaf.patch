@@ -1,13 +1,3 @@
-diff --git i/arch/arm64/configs/redbull_defconfig w/arch/arm64/configs/redbull_defconfig
-index 336f6b04b771..d38ab4f40b27 100644
---- i/arch/arm64/configs/redbull_defconfig
-+++ w/arch/arm64/configs/redbull_defconfig
-@@ -716,3 +716,5 @@ CONFIG_ARM64_STRICT_BREAK_BEFORE_MAKE=y
- CONFIG_KPROBES=y
- CONFIG_HAVE_KPROBES=y
- CONFIG_KPROBE_EVENTS=y
-+#CONFIG_CMDLINE="slub_debug=FPZU"
-+#CONFIG_CMDLINE_EXTEND=y
 diff --git i/drivers/usb/gadget/function/f_hid.c w/drivers/usb/gadget/function/f_hid.c
 index d61d0d2bb090..56a401fabebf 100644
 --- i/drivers/usb/gadget/function/f_hid.c
